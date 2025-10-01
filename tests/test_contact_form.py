@@ -2,7 +2,13 @@ from pages.contact_page import ContactPage
 import os
 
 def get_local_url():
-    return "http://127.0.0.1:8000/contact_form.html"
+    import os
+    if os.getenv("GITHUB_ACTIONS") == "true":
+        return "http://127.0.0.1:8000/contact_form.html"
+    else:
+        path = os.path.abspath("contact_form.html")
+        return "file://" + path
+
 
 def test_positive_contact_form(driver):
     page = ContactPage(driver, get_local_url())
