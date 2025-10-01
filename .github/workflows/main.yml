@@ -27,6 +27,7 @@ jobs:
       - name: Start local HTTP server
         run: |
           python -m http.server 8000 &
+          timeout /t 10
       
       - name: Run tests
         run: |
