@@ -2,8 +2,7 @@ from pages.contact_page import ContactPage
 import os
 
 def get_local_url():
-    path = os.path.abspath("contact_form.html")
-    return "file://" + path
+    return "http://127.0.0.1:8000/contact_form.html"
 
 def test_positive_contact_form(driver):
     page = ContactPage(driver, get_local_url())
