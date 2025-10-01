@@ -24,11 +24,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Start local HTTP server
+      - name: Start local HTTP server and run tests
+        shell: pwsh
         run: |
-          python -m http.server 8000 &
-          timeout /t 10
-      
-      - name: Run tests
-        run: |
+          Start-Process -NoNewWindow -FilePath python -ArgumentList "-m http.server 8000"
+          Start-Sleep -s 10
           pytest --maxfail=1 --disable-warnings -v
