@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма обратной связи</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .form-group { margin-bottom: 10px; }
+        label { display: block; margin-bottom: 5px; }
+        input, textarea { width: 300px; padding: 5px; }
+        .error { color: red; font-size: 14px; display: none; }
+        .success { color: green; font-size: 16px; display: none; margin-top: 10px; }
+    </style>
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let message = document.getElementById("message").value.trim();
+
+            let errorName = document.getElementById("error-name");
+            let errorEmail = document.getElementById("error-email");
+            let success = document.getElementById("success");
+
+            let isValid = true;
+
+            if (name === "") {
+                errorName.style.display = "block";
+                isValid = false;
+            } else {
+                errorName.style.display = "none";
+            }
+
+            if (email === "" || !email.includes("@")) {
+                errorEmail.style.display = "block";
+                isValid = false;
+            } else {
+                errorEmail.style.display = "none";
+            }
+
+            if (isValid) {
+                success.style.display = "block";
+            } else {
+                success.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Форма обратной связи</h1>
+    <form onsubmit="validateForm(event)">
+        <div class="form-group">
+            <label for="name">Имя *</label>
+            <input type="text" id="name" name="name">
+            <div id="error-name" class="error">Введите имя</div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="text" id="email" name="email">
+            <div id="error-email" class="error">Введите корректный email</div>
+        </div>
+        <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" name="message"></textarea>
+        </div>
+        <button type="submit">Отправить</button>
+        <div id="success" class="success">Форма успешно отправлена!</div>
+    </form>
+</body>
+</html>
